@@ -3,6 +3,7 @@
 ## Header.tsx
 
 getData should be formatted as follows: 
+
     `const getData = async () => {
         const response = await fetch("./data.json");
         const responseData = await response.json();
