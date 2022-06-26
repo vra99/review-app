@@ -44,22 +44,23 @@ this does not make much sense and is not really readable. We could instead grab 
 
 Rendering the code in this manner is neither readable nor effective, 
 
-`return data === undefined ? (
-<div>Loading...</div>
-) : (
+```
+    return data === undefined ? (
+    <div>Loading...</div>
+    ) : (
     ...rest of content
-    `
+```
 
 It should be implemented as follows:
     
-    <>
+`    <>
         {!data ? (
             <div>Loading...</div>
         ) : (
             ...rest of content
         )}
         }
-    </>
+    </>`
 
     An even better approach would be to implement a loading state, we could implement it as follows:
         `const [loading, setLoading] = useState<boolean>(true);`
