@@ -1,4 +1,4 @@
-## App Review
+# App Review
 
 ## App.tsx
 
@@ -198,7 +198,7 @@ This loop should be implemented as follows:
     }
     );
 
-This function should be wrapped with the React.useCallback hook
+This function should be wrapped with the React.useCallback hook, useCallback will return a memoized version of the callback that only changes if one of the inputs has changed. 
 
       const filterVisibleRamps = (evt: ViewStateChangeEvent) => {
             const bounds = evt.target.getBounds();
@@ -266,7 +266,7 @@ The following function:
     return data;
     };
 
-Could be wrapped in React.useMemo as it renders a large list of items and it will help with performance.
+Could be wrapped in React.useMemo as it renders a large list of items and it will help with performance. This code re-renders each time the parent is re-rendered — because the inline function is referentially different each time. useMemo focuses on avoiding heavy calculation.
     `const data = React.useMemo(() => calculateData(ramps), [ramps]);`
 
 ## table.tsx
