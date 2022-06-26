@@ -156,7 +156,7 @@ This is not needed!
         visibleFeatures = ramps.features;
     }
 
-visibleFeatures is already the same as ramps.features;
+`visibleFeatures is` already the same as `ramps.features`;
 
 This is not the best way to define an array of elements in react
 
