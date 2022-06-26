@@ -61,7 +61,7 @@ It should be implemented as follows:
         )}
         }
     </>
-    
+
 
 An even better approach would be to implement a loading state, we could implement it as follows:
 
@@ -268,6 +268,7 @@ The following function:
     };
 
 Could be wrapped in React.useMemo as it renders a large list of items and it will help with performance. This code re-renders each time the parent is re-rendered — because the inline function is referentially different each time. useMemo focuses on avoiding heavy calculation.
+
     `const data = React.useMemo(() => calculateData(ramps), [ramps]);`
 
 ## table.tsx
