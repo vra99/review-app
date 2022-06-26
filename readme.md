@@ -1,4 +1,4 @@
-# App Review
+## App Review
 
 ## App.tsx
 
@@ -53,14 +53,15 @@ Rendering the code in this manner is neither readable nor effective,
 
 It should be implemented as follows:
     
-`    <>
+    <>
         {!data ? (
             <div>Loading...</div>
         ) : (
             ...rest of content
         )}
         }
-    </>`
+    </>
+    
 
 An even better approach would be to implement a loading state, we could implement it as follows:
 
