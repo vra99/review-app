@@ -62,7 +62,8 @@ It should be implemented as follows:
         }
     </>`
 
-    An even better approach would be to implement a loading state, we could implement it as follows:
+An even better approach would be to implement a loading state, we could implement it as follows:
+
         `const [loading, setLoading] = useState<boolean>(true);`
         `useEffect(() => {
             getData()
