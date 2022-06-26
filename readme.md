@@ -152,15 +152,15 @@ Then implement it in the component as follows:
 
 This is not needed!
 
-  if (!visibleFeatures) {
-    visibleFeatures = ramps.features;
-  }
+    if (!visibleFeatures) {
+        visibleFeatures = ramps.features;
+    }
 
 visibleFeatures is already the same as ramps.features;
 
 This is not the best way to define an array of elements in react
 
-  const features: JSX.Element[] = [];
+    const features: JSX.Element[] = [];
 
 Instead we could define it as follows:
     
