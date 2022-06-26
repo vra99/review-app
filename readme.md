@@ -4,16 +4,16 @@
 
 getData should be formatted as follows:
 
-    `const getData = async () => {
+    ```const getData = async () => {
         const response = await fetch("./data.json");
         const responseData = await response.json();
         return responseData;
-    };`
+    };```
 
 getData function should be executed in useEffect not outside of it.
 getData should be executed as follows in the useEffect hook:
 
-    `useEffect(() => {
+    ```useEffect(() => {
         getData()
             .then((data) => {
                 setData(data);
@@ -21,7 +21,7 @@ getData should be executed as follows in the useEffect hook:
             .catch((err) => {
                 setLoading(true);
             });
-    }, []);`
+    }, []);```
 
 We also need to remove data from the dependencies in the useEffect hook, as it will prevent the useEffect hook for running an infinite loop
 
