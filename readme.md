@@ -169,3 +169,98 @@ This loop is not the right way to create an effective and readable list map of f
         );
     }
     );
+
+    This function should be wrapped with the React.useCallback hook
+      const filterVisibleRamps = (evt: ViewStateChangeEvent) => {
+            const bounds = evt.target.getBounds();
+            const visibleRamps = ramps.features.filter(
+            ({ geometry: { coordinates } }) => {
+                let inBounds = true;
+                console.log(coordinates);
+                coordinates[0][0].map((coordKvPair) => {
+                if (!bounds.contains(coordKvPair as [number, number])) {
+                    inBounds = false;
+                }
+                });
+                return inBounds;
+            }
+            );
+            setVisibleFeatures(visibleRamps);
+    };
+
+    Insted of the above the function should be wrapped as follow:
+      const filterVisibleRamps = React.useCallback( () => (evt: ViewStateChangeEvent) => {
+            const bounds = evt.target.getBounds();
+            const visibleRamps = ramps.features.filter(
+            ({ geometry: { coordinates } }) => {
+                let inBounds = true;
+                console.log(coordinates);
+                coordinates[0][0].map((coordKvPair) => {
+                if (!bounds.contains(coordKvPair as [number, number])) {
+                    inBounds = false;
+                }
+                });
+                return inBounds;
+            }
+            );
+            setVisibleFeatures(visibleRamps);
+    }, []);
+
+
+## materials-pie-chart.tsx
+
+The following function:
+const calculateData = (ramps: RampData) => {
+  const data: ChartDatum[] = [];
+
+  try {
+    ramps.features.forEach((feature) => {
+      const index = data.findIndex((w) => w.id === feature.properties.material);
+      if (index > -1) {
+        data[index] = {
+          id: feature.properties.material,
+          value: data[index].value + 1,
+        };
+      } else {
+        data.push({
+          id: feature.properties.material,
+          value: 1,
+        });
+      }
+    });
+  } catch (ex) {
+    console.error(ex);
+  }
+
+  return data;
+};
+
+Could be wrapped in React.useMemo as it renders a large list of items and it will help with performance.
+    const data = React.useMemo(() => calculateData(ramps), [ramps]);
+
+## table.tsx
+
+The following map should include keys as swell as all other maps in this app, Keys help React identify which items have changed, are added, or are removed. Keys should be given to the elements inside the array to give the elements a stable identity.
+    Bad
+          {data.map((row) => (
+            <TableRow>
+              <TableCell>{row.rec_id}</TableCell>
+              <TableCell>{row.material}</TableCell>
+              <TableCell>{row.area_}</TableCell>
+              <TableCell>{row.condition}</TableCell>
+              <TableCell>{row.owner}</TableCell>
+              <TableCell>{row.update_dat}</TableCell>
+            </TableRow>
+          ))}
+
+    Good
+            {data.map((row) => (
+                <TableRow key={row.rec_id}>
+                    <TableCell>{row.rec_id}</TableCell>
+                    <TableCell>{row.material}</TableCell>
+                    <TableCell>{row.area_}</TableCell>
+                    <TableCell>{row.condition}</TableCell>
+                    <TableCell>{row.owner}</TableCell>
+                    <TableCell>{row.update_dat}</TableCell>
+                </TableRow>
+            ))}
